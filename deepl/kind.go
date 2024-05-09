@@ -1,10 +1,10 @@
 package deepl
 
 type TranslationsResponse struct {
-	Translations []TranslationResponse `json:"translations"`
+	Translations []Translations `json:"translations"`
 }
 
-type TranslationResponse struct {
+type Translations struct {
 	DetectedSourceLanguage string `json:"detected_source_language"`
 	Text                   string `json:"text"`
 }

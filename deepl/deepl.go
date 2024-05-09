@@ -1,8 +1,8 @@
 package deepl
 
 import (
+	"fmt"
 	"github.com/gen2brain/beeep"
-	"log"
 	"net/http"
 )
 
@@ -23,7 +23,7 @@ func TranslateText(text string) {
 	response := TranslationsResponse{}
 	err := httpClient.SendRequest(request, &response)
 	if err != nil {
-		log.Fatalf("Translation error: %v", err)
+		panic(fmt.Sprintf("Translation error: %v", err))
 	}
 
 	if len(response.Translations) > 0 {

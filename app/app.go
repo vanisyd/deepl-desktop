@@ -1,11 +1,10 @@
 package app
 
 import (
-	"github.com/gen2brain/beeep"
-	"golang.design/x/clipboard"
+	"deepl-desktop/deepl"
 )
 
 func Handle() {
-	text := string(clipboard.Read(clipboard.FmtText))
-	beeep.Notify("DeepL Desktop", text, "")
+	//text := string(clipboard.Read(clipboard.FmtText))
+	deepl.TranslateText("Hello my friend")
 }

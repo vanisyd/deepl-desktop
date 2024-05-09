@@ -1,7 +1,7 @@
 package main
 
 import (
-	"deepl-desktop/deepl"
+	"deepl-desktop/app"
 	"github.com/joho/godotenv"
 )
 
@@ -10,14 +10,16 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	deepl.TranslateText("My first test")
+	app.Handle()
+	/*if err := clipboard.Init(); err != nil {
+		panic(fmt.Sprintf("Error initializing clipboard: %v", err))
+	}*/
+	//mainthread.Init(fn)
 }
 
 /*func fn() {
-	if err := clipboard.Init(); err != nil {
-		log.Fatalf("Error initializing clipboard: %v", err)
-	}
 
+	wg := sync.WaitGroup{}
 	wg.Add(1)
 	go func() {
 		for {
@@ -32,12 +34,11 @@ func keyHandler() {
 	if err := hk.Register(); err != nil {
 		return
 	}
-	defer hk.Unregister()
 
 	log.Printf("Registered hotkey: %v", hk)
 	<-hk.Keydown()
-	log.Printf("Hotkey pressed: %v", hk)
 	app.Handle()
 
+	hk.Unregister()
 	return
 }*/
