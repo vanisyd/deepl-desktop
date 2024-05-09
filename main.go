@@ -1,31 +1,25 @@
 package main
 
 import (
-	"deepl-desktop/app"
+	"deepl-desktop/deepl"
 	"github.com/joho/godotenv"
-	"golang.design/x/clipboard"
-	"golang.design/x/hotkey"
-	"golang.design/x/hotkey/mainthread"
-	"log"
-	"sync"
 )
 
 func main() {
-	if err := godotenv.Load(); err != nil {
-		log.Fatal(err)
+	err := godotenv.Load(".env")
+	if err != nil {
+		panic(err)
 	}
-	mainthread.Init(fn)
+	deepl.TranslateText("My first test")
 }
 
-func fn() {
+/*func fn() {
 	if err := clipboard.Init(); err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error initializing clipboard: %v", err)
 	}
 
-	wg := sync.WaitGroup{}
 	wg.Add(1)
 	go func() {
-		defer wg.Done()
 		for {
 			keyHandler()
 		}
@@ -38,10 +32,12 @@ func keyHandler() {
 	if err := hk.Register(); err != nil {
 		return
 	}
+	defer hk.Unregister()
 
+	log.Printf("Registered hotkey: %v", hk)
 	<-hk.Keydown()
+	log.Printf("Hotkey pressed: %v", hk)
 	app.Handle()
 
-	hk.Unregister()
 	return
-}
+}*/
