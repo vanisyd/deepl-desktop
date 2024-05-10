@@ -1,10 +1,8 @@
 package app
 
-import (
-	"deepl-desktop/deepl"
-)
+import "deepl-desktop/deepl"
 
 func Handle() {
 	//text := string(clipboard.Read(clipboard.FmtText))
-	deepl.TranslateText("Hello my friend")
+	deepl.TranslateText("My little friend")
 }
