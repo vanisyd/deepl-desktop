@@ -2,7 +2,10 @@ package main
 
 import (
 	"deepl-desktop/app"
+	"fmt"
 	"github.com/joho/godotenv"
+	"github.com/vanisyd/hotkey"
+	"github.com/vanisyd/hotkey/input"
 )
 
 func main() {
@@ -10,35 +13,23 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	app.Handle()
-	/*if err := clipboard.Init(); err != nil {
-		panic(fmt.Sprintf("Error initializing clipboard: %v", err))
-	}*/
-	//mainthread.Init(fn)
-}
+	app.Init()
 
-/*func fn() {
-
-	wg := sync.WaitGroup{}
-	wg.Add(1)
-	go func() {
-		for {
-			keyHandler()
-		}
-	}()
-	wg.Wait()
-}
-
-func keyHandler() {
-	hk := hotkey.New([]hotkey.Modifier{hotkey.ModShift}, hotkey.KeyC)
-	if err := hk.Register(); err != nil {
-		return
+	hk := hotkey.Hotkey{
+		Keys: []input.KeyCode{
+			input.KeyCtrl,
+			input.KeyC,
+		},
+		TapsCount: 2,
 	}
+	go hk.Register()
 
-	log.Printf("Registered hotkey: %v", hk)
-	<-hk.Keydown()
-	app.Handle()
-
-	hk.Unregister()
-	return
-}*/
+	for {
+		select {
+		case <-hk.HotkeyPressed:
+			fmt.Println("Hotkey pressed")
+			app.Handle()
+		default:
+		}
+	}
+}
